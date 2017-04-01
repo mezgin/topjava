@@ -11,10 +11,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Objects;
 
 import static org.slf4j.LoggerFactory.getLogger;
@@ -49,7 +47,7 @@ public class MealServlet extends HttpServlet {
 
         if (action == null) {
             LOG.info("getAllMeals");
-            request.setAttribute("mealList", MealsUtil.getWithExceeded((List<Meal>) repository.getAllMeal(), 2000));
+            request.setAttribute("mealList", MealsUtil.getWithExceeded(repository.getAllMeal(), MealsUtil.DEFAULT_CALORIES_PER_DAY));
 
             request.getRequestDispatcher("/mealList.jsp").forward(request, response);
         } else if (action.equals("delete")) {
